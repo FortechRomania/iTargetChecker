@@ -52,10 +52,12 @@ module Fastlane
         end
 
         if lostFiles.length > 0
-          UI.crash! "Lost files found!"
+          UI.error "Lost files found!"
         else 
           UI.success "✅  Yupee! ✨  No lost files found! ✨"
         end
+
+        lostFiles
       end
 
       def self.description

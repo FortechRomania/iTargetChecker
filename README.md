@@ -2,14 +2,6 @@
 
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-itargetchecker)
 
-## Getting Started
-
-This project is a [_fastlane_](https://github.com/fastlane/fastlane) plugin. To get started with `fastlane-plugin-itargetchecker`, add it to your project by running:
-
-```bash
-fastlane add_plugin itargetchecker
-```
-
 ## About itargetchecker
 
 Checks the xcode proj file for targets and points out which files from the project are not present in a certain target.
@@ -17,13 +9,37 @@ Usualy this helps if you have a project with multiple targets and you want to ma
 
 At the first run you should check the plugin without passing some ignore files just to see what the plugin finds. After the first run, you should check for false alarms and add those files to youre custom ignore list.
 
+## Getting Started
+
+This project is a [_fastlane_](https://github.com/fastlane/fastlane) plugin. 
+
+If you are new to Fastlane or haven't installed a plugin for Fastlane before, please check the plugins section below. 
+Shortcut for those who don't have time to read more:
+- Execute the following commands:
+```bash
+fastlane add_plugin fastlane-plugin-itargetchecker
+fastlane install_plugins
+ ```
+    
+ After these you should be able to use the plugin as pointed in the example below.
+
+
 ## Example
 
 Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
 
 **Note:** The ignored files added in the sample should be changed to match your own rules. 
 
-## Run tests for this plugin
+**Quick ussage sample:**
+
+```ruby 
+itargetchecker(project_path:"../YourProj.xcodeproj", 
+                    ignore_files:["SwiftyJSON.framework", "CoreLocation.framework", "Pods-YourProjRelease.release.xcconfig", 
+                    "Pods-YourProjRelease.debug.xcconfig", "Pods-YourProj.release.xcconfig", "Pods-YourProj.debug.xcconfig", "Info.plist", "Base", "BRASL.h"],
+                    ignore_targets:["YourProjTests"])
+```
+
+## Run tests for this plugin (to be continued..)
 
 To run both the tests, and code style validation, run
 

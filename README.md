@@ -13,14 +13,15 @@ fastlane add_plugin itargetchecker
 ## About itargetchecker
 
 Checks the xcode proj file for targets and points out which files from the project are not present in a certain target.
+Usualy this helps if you have a project with multiple targets and you want to make sure that certain classes/resources from your project are present in each of the targets.
 
-**Note to author:** Add a more detailed description about this plugin here. If your plugin contains multiple actions, make sure to mention them here.
+At the first run you should check the plugin without passing some ignore files just to see what the plugin finds. After the first run, you should check for false alarms and add those files to youre custom ignore list.
 
 ## Example
 
 Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
 
-**Note to author:** Please set up a sample project to make it easy for users to explore what your plugin does. Provide everything that is necessary to try out the plugin in this project (including a sample Xcode/Android project if necessary)
+**Note:** The ignored files added in the sample should be changed to match your own rules. 
 
 ## Run tests for this plugin
 

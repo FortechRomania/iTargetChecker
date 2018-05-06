@@ -27,6 +27,12 @@ module Fastlane
 
             found = false
 
+            if params[:ignore_targets]
+              if (params[:ignore_targets].include? target.name)
+                next
+              end
+            end
+
             target.build_phases.each do |buildPhase|
 
                 correctTypes =  buildPhase.isa == "PBXSourcesBuildPhase" || buildPhase.isa == "PBXResourcesBuildPhase"
@@ -88,9 +94,14 @@ module Fastlane
                                        type: String),
           FastlaneCore::ConfigItem.new(key: :ignore_files,
                                        env_name: "ITARGETCHECKER_IGNORE_FILES",
-                                    description: "List of files that should not be checked",
+                                    description: "List of files that should not be scanned",
                                        optional: true,
-                                           type: Array)
+                                           type: Array),
+          FastlaneCore::ConfigItem.new(key: :ignore_targets,
+                                           env_name: "ITARGETCHECKER_IGNORE_TARGETS",
+                                        description: "List of targets that should not be scanned",
+                                           optional: true,
+                                               type: Array)
         ]
       end
 

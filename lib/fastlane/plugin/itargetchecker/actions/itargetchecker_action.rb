@@ -10,13 +10,19 @@ module Fastlane
         project = Xcodeproj::Project.open(params[:project_path])
 
         lostFiles = Array.new
+        ignoredFiles = params[:ignore_files]
 
         # loop through all the project files
         project.files.each do |file|
 
           faultyFile = file.name == nil || file.name == "" 
-          if params[:ignore_files]
-             faultyFile = faultyFile || (params[:ignore_files].include? file.name)
+          if ignoredFiles
+            ignoredFiles.each do |ignoredItem|
+                faultyFile = faultyFile || file.name.match(ignoredItem)
+                if faultyFile
+                  next
+                end
+            end
           end   
 
           if faultyFile

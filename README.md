@@ -34,10 +34,9 @@ You can now use regex in the ignored files strings passed to the plugin. That ca
 **Quick ussage sample:**
 
 ```ruby 
-itargetchecker(project_path:"../YourProj.xcodeproj", 
-                    ignore_files:["SwiftyJSON.framework", "CoreLocation.framework", "Pods-YourProjRelease.release.xcconfig", 
-                    "Pods-YourProjRelease.debug.xcconfig", "Pods-YourProj.release.xcconfig", "Pods-YourProj.debug.xcconfig", "Info.plist", "Base", "BRASL.h"],
-                    ignore_targets:["YourProjTests"])
+itargetchecker(project_path:"../your_project.xcodeproj", 
+                    ignore_files:["\w*\.framework\b*", "\w*\.xcconfig\b*", "\w*\.h\b*", "Info.plist"],
+                    ignore_targets:["your_projectTests"])    
 ```
 
 ## Run tests for this plugin (to be continued..)

@@ -27,6 +27,7 @@ fastlane install_plugins
 ## Example
 
 Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
+You can now use regex in the ignored files strings passed to the plugin. That can help you to ignore certain file types like .h or Tests.m.
 
 **Note:** The ignored files added in the sample should be changed to match your own rules. 
 

@@ -2,10 +2,9 @@
 
     # Ignores some frameworks, some cocoapods generated xccoonfig files and other resource files. Besides that it ignores the test target 
 
-    lostFiles = itargetchecker(project_path:"../YourProj.xcodeproj", 
-                    ignore_files:["SwiftyJSON.framework", "CoreLocation.framework", "Pods-YourProjRelease.release.xcconfig", 
-                    "Pods-YourProjRelease.debug.xcconfig", "Pods-YourProj.release.xcconfig", "Pods-YourProj.debug.xcconfig", "Info.plist", "Base", "BRASL.h"],
-                    ignore_targets:["YourProjTests"])
+    lostFiles = itargetchecker(project_path:"../your_project.xcodeproj", 
+                    ignore_files:["\w*\.framework\b*", "\w*\.xcconfig\b*", "\w*\.h\b*", "Info.plist"],
+                    ignore_targets:["your_projectTests"])
     
     if lostFiles.count > 0
       UI.message "UPSY #{lostFiles}"

@@ -1,5 +1,6 @@
 require 'fastlane/action'
 require 'xcodeproj'
+require_relative 'itargetchecker'
 require_relative '../helper/itargetchecker_helper'
 
 module Fastlane
@@ -7,69 +8,15 @@ module Fastlane
     class ItargetcheckerAction < Action
       def self.run(params)
         
-        project = Xcodeproj::Project.open(params[:project_path])
-
-        lostFiles = Array.new
-        ignoredFiles = params[:ignore_files]
-
-        # loop through all the project files
-        project.files.each do |file|
-
-          faultyFile = file.name == nil || file.name == "" 
-          if ignoredFiles
-            ignoredFiles.each do |ignoredItem|
-                faultyFile = faultyFile || file.name.match(ignoredItem)
-                if faultyFile
-                  next
-                end
-            end
-          end   
-
-          if faultyFile
-            next
-          end
-
-          project.targets.each do |target|
-
-            found = false
-
-            if params[:ignore_targets]
-              if (params[:ignore_targets].include? target.name)
-                next
-              end
-            end
-
-            target.build_phases.each do |buildPhase|
-
-                correctTypes =  buildPhase.isa == "PBXSourcesBuildPhase" || buildPhase.isa == "PBXResourcesBuildPhase"
-                if correctTypes
-                  # get all files of a target
-                  buildPhase.files.each do |targetFile|
-                    if targetFile.display_name == file.name
-                      found = true
-                      break
-                    end
-                  end
-
-                end
-            end
-
-            if found == false 
-              UI.error "\n Can't find file: #{file.name} in target: #{target}"
-              lostFiles.push("file: #{file.name} target: #{target}")
-            end
-      
-          end
-
-        end
-
-        if lostFiles.length > 0
+        output = ITargetChecker.checkTarget(project_path:params[:project_path], ignore_files:params[:ignore_files], ignore_targets:params[:ignore_targets])
+        if output.length > 0
+          UI.error output
           UI.error "Lost files found!"
         else 
           UI.success "✅  Yupee! ✨  No lost files found! ✨"
         end
 
-        lostFiles
+        output
       end
 
       def self.description

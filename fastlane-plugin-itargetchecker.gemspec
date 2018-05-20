@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
+  spec.executables << 'itargetchecker'
 
   # Don't add a dependency to fastlane or fastlane_re
   # since this would cause a circular dependency

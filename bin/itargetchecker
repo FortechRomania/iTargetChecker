@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'fastlane/plugin/itargetchecker/actions/itargetchecker'
+
+# Requests 3 parameters, 1 xcodeproj file path, 2 ignored files (if more than 1, split by #), 3 ignored targets (if more than 1, split by #)
+
+ignoreFiles = ""
+ignoreTargets = ""
+
+if ARGV[1] 
+    ignoreFiles = ARGV[1].split("#")
+end
+
+if ARGV[2] 
+    ignoreTargets = ARGV[2].split("#")
+end
+
+puts ITargetChecker.checkTarget(project_path:ARGV[0], 
+                    ignore_files:ignoreFiles,
+                    ignore_targets:ignoreTargets)
+
+
+                    

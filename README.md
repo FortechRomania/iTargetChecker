@@ -9,6 +9,8 @@ Usualy this helps if you have a project with multiple targets and you want to ma
 
 At the first run you should check the plugin without passing some ignore files just to see what the plugin finds. After the first run, you should check for false alarms and add those files to youre custom ignore list.
 
+**Attention!**  You can use the plugin as a gem as well, without having to setup Fastlane(though it is recommended as it helps a lot)
+
 ## Getting Started
 
 This project is a [_fastlane_](https://github.com/fastlane/fastlane) plugin. 
@@ -20,7 +22,7 @@ Shortcut for those who don't have time to read more:
 fastlane add_plugin fastlane-plugin-itargetchecker
 fastlane install_plugins
  ```
-    
+
  After these you should be able to use the plugin as pointed in the example below.
 
 
@@ -30,6 +32,24 @@ Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plu
 You can now use regex in the ignored files strings passed to the plugin. That can help you to ignore certain file types like .h or Tests.m.
 
 **Note:** The ignored files added in the sample should be changed to match your own rules. 
+
+## Run as gem executable
+
+If you don't want to install the plugin for fastlane, you can simply run  ```gem install fastlane-plugin-itargetchecker``` and after that you should be able to use itargetchecker.
+
+You can use the executable as following:
+
+```
+bundle exec itargetchecker "yourProject.xcodeproj" "\w*\.framework\b*#\w*\.xcconfig\b*#\w*\.h\b*#Info.plist" "yourProjectTests" 
+```
+
+
+Basicaly the command takes 3 parameters:
+1. the xcodeproj file path
+2. the files to be ignored (if more than 1, # is used to split them -see the exemple above-)
+3. the targets to be ignored (if more than 1, # is used to split them -see the exemple above-)
+
+
 
 **Quick ussage sample:**
 

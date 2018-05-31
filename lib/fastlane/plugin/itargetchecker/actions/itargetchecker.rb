@@ -11,11 +11,11 @@ class ITargetChecker
         # loop through all the project files
         project.files.each do |file|
 
-          faultyFile = file.name == nil || file.name == "" 
+          faultyFile = false
           if ignoredFiles
             ignoredFiles.each do |ignoredItem|
-                faultyFile = faultyFile || file.name.match(ignoredItem)
-                if faultyFile
+                faultyFile = file.path.match(ignoredItem)
+                if faultyFile               
                   next
                 end
             end
@@ -24,6 +24,7 @@ class ITargetChecker
           if faultyFile
             next
           end
+
 
           project.targets.each do |target|
 
@@ -41,7 +42,8 @@ class ITargetChecker
                 if correctTypes
                   # get all files of a target
                   buildPhase.files.each do |targetFile|
-                    if targetFile.display_name == file.name
+                  
+                    if targetFile.file_ref == file.uuid
                       found = true
                       break
                     end
@@ -50,7 +52,7 @@ class ITargetChecker
             end
 
             if found == false 
-              lostFiles.push("file: #{file.name} target: #{target}")
+              lostFiles.push("file: #{file.path} target: #{target}")
             end
           end
     end
